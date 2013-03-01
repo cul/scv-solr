@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--  
+    For information on how to customize this file, please see
+    http://wiki.apache.org/solr/SolrConfigXml. The page also has a link to 
+    an extensively commented version of this file. 
+-->
+<config>
+  <luceneMatchVersion>LUCENE_41</luceneMatchVersion>
+  <abortOnConfigurationError>${solr.abortOnConfigurationError:true}</abortOnConfigurationError>
+  <!-- <lib dir="../../lib" /> -->
+  <lib dir="/usr/local/solr/contrib/analysis-extras/lib" />
+  <lib dir="/usr/local/solr/contrib/analysis-extras/lucene-libs" />
+  <dataDir>${solr.scv_dev.data.dir:}</dataDir>
+  <directoryFactory name="DirectoryFactory" class="${solr.directoryFactory:solr.NRTCachingDirectoryFactory}"/>
+  <!-- index time configurations -->
+  <indexConfig>
+    <useCompoundFile>false</useCompoundFile>
+    <ramBufferSizeMB>32</ramBufferSizeMB>
+    <mergeFactor>10</mergeFactor>
+    <maxMergeDocs>2147483647</maxMergeDocs>
+    <maxFieldLength>10000</maxFieldLength>
+    <writeLockTimeout>1000</writeLockTimeout>
+    <commitLockTimeout>10000</commitLockTimeout>
+    <lockType>native</lockType>
+    <unlockOnStartup>false</unlockOnStartup>
+    <deletionPolicy class="solr.SolrDeletionPolicy">
+      <str name="keepOptimizedOnly">false</str>
+      <str name="maxCommitsToKeep">1</str>
+    </deletionPolicy>
+  </indexConfig>
+
+  <updateHandler class="solr.DirectUpdateHandler2">
+    <autoCommit> 
+      <maxTime>15000</maxTime> 
+      <openSearcher>false</openSearcher> 
+    </autoCommit>
+    <updateLog>
+      <str name="dir">${solr.scv_dev.data.dir:}</str>
+    </updateLog>
+  </updateHandler>
+
+  <!-- query time configurations -->
+  <query>
+    <maxBooleanClauses>1024</maxBooleanClauses>
+    <filterCache class="solr.FastLRUCache"
+        size="512" initialSize="512" autowarmCount="128"/>
+    <queryResultCache class="solr.LRUCache"
+        size="512" initialSize="512" autowarmCount="32"/>
+    <documentCache class="solr.LRUCache"
+        size="512" initialSize="512" autowarmCount="0"/>
+    <enableLazyFieldLoading>true</enableLazyFieldLoading>
+    <queryResultWindowSize>50</queryResultWindowSize>
+    <queryResultMaxDocsCached>200</queryResultMaxDocsCached>
+    <HashDocSet maxSize="3000" loadFactor="0.75"/>
+
+    <!-- a newSearcher event is fired whenever a new searcher is being prepared
+         and there is a current searcher handling requests (aka registered). -->
+    <listener event="newSearcher" class="solr.QuerySenderListener">
+      <arr name="queries">
+        <!-- query for all objects (default query) for home page facets -->
+        <lst>
+          <str name="rows">0</str> 
+          <str name="fl">score</str>
+          <str name="facet">true</str>
+          <str name="facet.mincount">1</str>
+          <str name="facet.limit">10</str>
+          <str name="facet.field">format</str>
+          <str name="facet.field">lib_collection_facet</str>
+          <str name="facet.field">lib_format_facet</str>
+          <str name="facet.field">lib_name_facet</str>
+          <str name="facet.field">lib_project_facet</str>
+          <str name="facet.field">lib_repo_facet</str>
+          <str name="facet.field">subject_era_facet</str>
+          <str name="facet.field">subject_geo_facet</str>
+          <str name="facet.field">subject_topic_facet</str>
+        </lst>
+        <!-- query for single document to populate filter cache -->
+        <lst>
+          <str name="q">id:00282214</str>
+          <str name="qt">standard</str>
+          <str name="rows">0</str>
+          <str name="fl">score</str>
+          <str name="facet">true</str>
+          <str name="facet.mincount">1</str>
+          <str name="facet.limit">10</str>
+          <str name="facet.field">format</str>
+          <str name="facet.field">lib_collection_facet</str>
+          <str name="facet.field">lib_format_facet</str>
+          <str name="facet.field">lib_name_facet</str>
+          <str name="facet.field">lib_project_facet</str>
+          <str name="facet.field">lib_repo_facet</str>
+          <str name="facet.field">subject_era_facet</str>
+          <str name="facet.field">subject_geo_facet</str>
+          <str name="facet.field">subject_topic_facet</str>
+        </lst>
+      </arr>
+    </listener>
+
+    <!-- a firstSearcher event is fired whenever a new searcher is being
+         prepared but there is no current registered searcher to handle
+         requests or to gain autowarming data from. -->
+    <listener event="firstSearcher" class="solr.QuerySenderListener">
+      <arr name="queries">
+        <!-- query for all objects (default query) for home page facets -->
+        <lst>
+          <str name="rows">0</str> 
+          <str name="fl">score</str>
+          <str name="facet">true</str>
+          <str name="facet.mincount">1</str>
+          <str name="facet.limit">10</str>
+          <str name="facet.field">format</str>
+          <str name="facet.field">lib_collection_facet</str>
+          <str name="facet.field">lib_format_facet</str>
+          <str name="facet.field">lib_name_facet</str>
+          <str name="facet.field">lib_project_facet</str>
+          <str name="facet.field">lib_repo_facet</str>
+          <str name="facet.field">subject_era_facet</str>
+          <str name="facet.field">subject_geo_facet</str>
+          <str name="facet.field">subject_topic_facet</str>
+        </lst>
+        <!-- query for single document to populate filter cache -->
+        <lst>
+          <str name="q">id:00282214</str>
+          <str name="qt">standard</str>
+          <str name="rows">0</str>
+          <str name="fl">score</str>
+          <str name="facet">true</str>
+          <str name="facet.mincount">1</str>
+          <str name="facet.limit">10</str>
+          <str name="facet.field">format</str>
+          <str name="facet.field">lib_collection_facet</str>
+          <str name="facet.field">lib_format_facet</str>
+          <str name="facet.field">lib_name_facet</str>
+          <str name="facet.field">lib_project_facet</str>
+          <str name="facet.field">lib_repo_facet</str>
+          <str name="facet.field">subject_era_facet</str>
+          <str name="facet.field">subject_geo_facet</str>
+          <str name="facet.field">subject_topic_facet</str>
+        </lst>
+      </arr>
+    </listener>
+
+    <useColdSearcher>false</useColdSearcher>
+    <maxWarmingSearchers>2</maxWarmingSearchers>
+  </query>
+
+  <requestDispatcher handleSelect="true" >
+    <requestParsers enableRemoteStreaming="false" multipartUploadLimitInKB="2048" />
+    <httpCaching lastModifiedFrom="openTime" etagSeed="Solr" />
+  </requestDispatcher>
+
+  <!-- blacklight does not use the standard request handler -->
+  <requestHandler name="standard" class="solr.SearchHandler">
+    <lst name="defaults">
+      <str name="echoParams">all</str>
+      <str name="q.op">AND</str>
+    </lst>
+  </requestHandler>
+
+  <!-- Searching ("All Fields") -->
+  <requestHandler name="search" class="solr.SearchHandler" default="true" >
+    <lst name="defaults">
+      <str name="defType">dismax</str>
+      <str name="echoParams">explicit</str>      
+      <str name="q.alt">*:*</str>
+      <str name="mm">2&lt;-1 5&lt;-2 6&lt;90%</str>
+      <str name="qf">
+        title_unstem_search^100000
+        lib_name_unstem_search^100000
+        subtitle_unstem_search^50000
+        clio_s^50000
+        title_t^25000
+        lib_date_facet^25000
+        subtitle_t^10000
+        title_addl_unstem_search^5000
+        title_addl_t^2500
+        title_added_entry_unstem_search^1500
+        title_added_entry_t^1250
+        extent_t^500
+        lib_subject_unstem_search^1000
+        lib_subject_facet^750
+        lib_subject_t^500
+        lib_name_t^500
+        lib_repo_t^500
+        lib_project_t^500
+        lib_collection_t^500
+        text
+      </str>
+      <str name="pf">
+        title_unstem_search^1000000
+        lib_name_unstem_search^1000000
+        subtitle_unstem_search^500000
+        clio_s^500000
+        title_t^250000
+        lib_date_facet^250000
+        subtitle_t^100000
+        title_addl_unstem_search^50000
+        title_addl_t^25000
+        title_added_entry_unstem_search^15000
+        title_added_entry_t^12500
+        extent_t^5000
+        lib_subject_unstem_search^10000
+        lib_subject_facet^6250
+        lib_subject_t^5000
+        lib_name_t^5000
+        lib_repo_t^5000
+        lib_project_t^5000
+        lib_collection_t^5000
+        subject_addl_unstem_search^2500
+        subject_addl_t^500
+        title_series_unstem_search^250
+        title_series_t^100
+        text^10
+      </str>
+      <int name="ps">3</int>
+      <float name="tie">0.01</float>
+
+      <xi:include href="index_fields.xml" xmlns:xi="http://www.w3.org/2001/XInclude">
+      </xi:include>
+     
+      <str name="facet">true</str>
+      <str name="facet.mincount">1</str>
+      <str name="facet.limit">10</str>
+      <str name="facet.field">format</str>
+      <str name="facet.field">lib_collection_facet</str>
+      <str name="facet.field">lib_format_facet</str>
+      <str name="facet.field">lib_name_facet</str>
+      <str name="facet.field">lib_project_facet</str>
+      <str name="facet.field">lib_repo_facet</str>
+      <str name="facet.field">subject_era_facet</str>
+      <str name="facet.field">subject_geo_facet</str>
+      <str name="facet.field">subject_topic_facet</str>
+      
+      <str name="spellcheck">true</str>
+      <str name="spellcheck.dictionary">default</str>
+      <str name="spellcheck.onlyMorePopular">true</str>
+      <str name="spellcheck.extendedResults">true</str>
+      <str name="spellcheck.collate">false</str>
+      <str name="spellcheck.count">5</str>
+    </lst>
+    <arr name="last-components">
+      <str>spellcheck</str>
+    </arr>
+  </requestHandler>
+  <!--  Searches Names only  -->
+  <requestHandler name="name_search" class="solr.SearchHandler" >
+    <lst name="defaults">
+      <str name="defType">dismax</str>
+      <str name="echoParams">explicit</str>
+      <str name="sort">score desc, title_sort asc, date_created_dt desc</str>   
+      <str name="q.alt">*:*</str>
+      <str name="mm">2&lt;-1 5&lt;-2 6&lt;90%</str>
+      <str name="qf">
+        lib_name_unstem_search^2000
+        lib_name_t^200
+      </str>
+      <str name="pf">
+        lib_name_unstem_search^20000
+        lib_name_t^2000
+      </str>
+      <int name="ps">3</int>
+      <float name="tie">0.01</float>
+
+      <xi:include href="index_fields.xml" xmlns:xi="http://www.w3.org/2001/XInclude">
+      </xi:include>
+      
+      <str name="facet">true</str>
+      <str name="facet.mincount">1</str>
+      <str name="facet.limit">10</str>
+      <str name="facet.field">format</str>
+      <str name="facet.field">lib_collection_facet</str>
+      <str name="facet.field">lib_format_facet</str>
+      <str name="facet.field">lib_name_facet</str>
+      <str name="facet.field">lib_project_facet</str>
+      <str name="facet.field">lib_repo_facet</str>
+      <str name="facet.field">subject_era_facet</str>
+      <str name="facet.field">subject_geo_facet</str>
+      <str name="facet.field">subject_topic_facet</str>
+      
+      <str name="spellcheck">true</str>
+      <str name="spellcheck.dictionary">name</str>
+      <str name="spellcheck.onlyMorePopular">true</str>
+      <str name="spellcheck.extendedResults">true</str>
+      <str name="spellcheck.collate">false</str>
+      <str name="spellcheck.count">5</str>
+    </lst>
+    <arr name="last-components">
+      <str>spellcheck</str>
+    </arr>
+  </requestHandler>
+  <!--  Searches Titles only  -->
+  <requestHandler name="title_search" class="solr.SearchHandler" >
+    <lst name="defaults">
+      <str name="defType">dismax</str>
+      <str name="echoParams">explicit</str>
+      <str name="sort">score desc, title_sort asc, date_created_dt desc</str>   
+      <str name="q.alt">*:*</str>
+      <str name="mm">2&lt;-1 5&lt;-2 6&lt;90%</str>
+      <str name="qf">
+        title_unstem_search^50000
+        dc_title_t^10000
+        title_t^10000
+        title_addl_t^2500
+      </str>
+      <str name="pf">
+        title_unstem_search^500000
+        dc_title_t^10000
+        title_t^100000
+        title_addl_t^25000
+      </str>
+      <int name="ps">3</int>
+      <float name="tie">0.01</float>
+
+      <xi:include href="index_fields.xml" xmlns:xi="http://www.w3.org/2001/XInclude">
+      </xi:include>
+
+      <str name="facet">true</str>
+      <str name="facet.mincount">1</str>
+      <str name="facet.limit">10</str>
+      <str name="facet.field">format</str>
+      <str name="facet.field">lib_collection_facet</str>
+      <str name="facet.field">lib_format_facet</str>
+      <str name="facet.field">lib_name_facet</str>
+      <str name="facet.field">lib_project_facet</str>
+      <str name="facet.field">lib_repo_facet</str>
+      <str name="facet.field">subject_era_facet</str>
+      <str name="facet.field">subject_geo_facet</str>
+      <str name="facet.field">subject_topic_facet</str>
+      
+      <str name="spellcheck">true</str>
+      <str name="spellcheck.dictionary">title</str>
+      <str name="spellcheck.onlyMorePopular">true</str>
+      <str name="spellcheck.extendedResults">true</str>
+      <str name="spellcheck.collate">false</str>
+      <str name="spellcheck.count">5</str>
+    </lst>
+    <arr name="last-components">
+      <str>spellcheck</str>
+    </arr>
+  </requestHandler>
+  <!--  Searches Subjects only  -->
+  <requestHandler name="subject_search" class="solr.SearchHandler" >
+    <lst name="defaults">
+      <str name="defType">dismax</str>
+      <str name="echoParams">explicit</str>
+      <str name="sort">score desc, title_sort asc, date_created_dt desc</str>   
+      <str name="q.alt">*:*</str>
+      <str name="mm">2&lt;-1 5&lt;-2 6&lt;90%</str>
+      <str name="qf">
+        lib_subject_t^200
+        lib_subject_facet^100
+      </str>
+      <str name="pf">
+        lib_subject_t^2000
+        lib_subject_facet^500
+      </str>
+      <int name="ps">3</int>
+      <float name="tie">0.01</float>
+      
+      <xi:include href="index_fields.xml" xmlns:xi="http://www.w3.org/2001/XInclude">
+      </xi:include>
+      
+      <str name="facet">true</str>
+      <str name="facet.mincount">1</str>
+      <str name="facet.limit">10</str>
+      <str name="facet.field">format</str>
+      <str name="facet.field">lib_collection_facet</str>
+      <str name="facet.field">lib_format_facet</str>
+      <str name="facet.field">lib_name_facet</str>
+      <str name="facet.field">lib_project_facet</str>
+      <str name="facet.field">lib_repo_facet</str>
+      <str name="facet.field">subject_era_facet</str>
+      <str name="facet.field">subject_geo_facet</str>
+      <str name="facet.field">subject_topic_facet</str>
+      
+      <str name="spellcheck">true</str>
+      <str name="spellcheck.dictionary">subject</str>
+      <str name="spellcheck.onlyMorePopular">true</str>
+      <str name="spellcheck.extendedResults">true</str>
+      <str name="spellcheck.collate">false</str>
+      <str name="spellcheck.count">5</str>
+    </lst>
+    <arr name="last-components">
+      <str>spellcheck</str>
+    </arr>
+  </requestHandler>
+
+  <requestHandler name="clio_search" class="solr.SearchHandler" >
+    <lst name="defaults">
+      <str name="defType">dismax</str>
+      <str name="echoParams">explicit</str>
+      <str name="sort">score desc, title_sort asc, date_created_dt desc</str>   
+      <str name="q.alt">*:*</str>
+      <str name="mm">2&lt;-1 5&lt;-2 6&lt;90%</str>
+      <str name="qf">
+        clio_s^50000
+      </str>
+      <str name="pf">
+        clio_s^50000
+      </str>
+      <int name="ps">3</int>
+      <float name="tie">0.01</float>
+      <xi:include href="index_fields.xml" xmlns:xi="http://www.w3.org/2001/XInclude">
+      </xi:include>
+      
+      <str name="facet">true</str>
+      <str name="facet.mincount">1</str>
+      <str name="facet.limit">10</str>
+      <str name="facet.field">format</str>
+      <str name="facet.field">lib_collection_facet</str>
+      <str name="facet.field">lib_format_facet</str>
+      <str name="facet.field">lib_name_facet</str>
+      <str name="facet.field">lib_project_facet</str>
+      <str name="facet.field">lib_repo_facet</str>
+      <str name="facet.field">subject_era_facet</str>
+      <str name="facet.field">subject_geo_facet</str>
+      <str name="facet.field">subject_topic_facet</str>
+      
+      <str name="spellcheck">true</str>
+      <str name="spellcheck.dictionary">subject</str>
+      <str name="spellcheck.onlyMorePopular">true</str>
+      <str name="spellcheck.extendedResults">true</str>
+      <str name="spellcheck.collate">false</str>
+      <str name="spellcheck.count">5</str>
+    </lst>
+    <arr name="last-components">
+      <str>spellcheck</str>
+    </arr>
+  </requestHandler>
+
+<requestHandler name="permissions" class="solr.SearchHandler" >
+    <lst name="defaults">
+      <str name="facet">off</str>
+      <str name="echoParams">all</str>
+      <str name="rows">1</str>
+      <str name="q">{!raw f=id v=$id}</str>
+      <str name="fl">
+        id,access_t,
+        discover_access_group_t,discover_access_person_t,
+        read_access_group_t,read_access_person_t,
+        edit_access_group_t,edit_access_person_t,
+        depositor_t,
+        embargo_release_date_dt
+      </str>
+    </lst>
+  </requestHandler>
+
+  <!-- for requests to get a single document; use id=666 instead of q=id:666 -->
+  <requestHandler name="document" class="solr.SearchHandler" >
+    <lst name="defaults">
+      <str name="echoParams">all</str>
+      <str name="fl">*</str>
+      <str name="rows">1</str>
+      <str name="q">{!raw f=id v=$id}</str>
+    </lst>
+  </requestHandler>
+  
+  <searchComponent name="spellcheck" class="solr.SpellCheckComponent">
+    <str name="queryAnalyzerFieldType">textSpell</str>
+    <lst name="spellchecker">
+      <str name="name">default</str>
+      <str name="field">spell</str>
+      <str name="spellcheckIndexDir">./spell</str>
+      <str name="buildOnOptimize">true</str>
+    </lst>
+    <lst name="spellchecker">
+      <str name="name">name</str>
+      <str name="field">name_spell</str>
+      <str name="spellcheckIndexDir">./spell_name</str>
+      <str name="accuracy">0.7</str>
+      <str name="buildOnOptimize">true</str>
+    </lst>
+    <lst name="spellchecker">
+      <str name="name">subject</str>
+      <str name="field">subject_spell</str>
+      <str name="spellcheckIndexDir">./spell_subject</str>
+      <str name="accuracy">0.7</str>
+      <str name="buildOnOptimize">true</str>
+    </lst>
+    <lst name="spellchecker">
+      <str name="name">title</str>
+      <str name="field">title_spell</str>
+      <str name="spellcheckIndexDir">./spell_title</str>
+      <str name="accuracy">0.7</str>
+      <str name="buildOnOptimize">true</str>
+    </lst>
+    <lst name="spellchecker">
+      <str name="name">clio</str>
+      <str name="field">clio_s</str>
+      <str name="spellcheckIndexDir">./spell_clio</str>
+      <str name="accuracy">0.8</str>
+      <str name="buildOnOptimize">true</str>
+    </lst>
+  </searchComponent>
+
+  <requestHandler name="/update" class="solr.XmlUpdateRequestHandler" />
+  <requestHandler name="/update/javabin" class="solr.BinaryUpdateRequestHandler" />
+  <requestHandler name="/analysis" class="solr.FieldAnalysisRequestHandler" />
+  <requestHandler name="/admin/" class="org.apache.solr.handler.admin.AdminHandlers" />
+  <requestHandler name="/admin/ping" class="solr.PingRequestHandler">
+    <lst name="defaults">
+      <str name="qt">search</str>
+      <str name="q">book</str>
+      <str name="echoParams">all</str>
+    </lst>
+  </requestHandler>
+  <admin>
+    <defaultQuery>book</defaultQuery>
+  </admin>
+
+  <requestHandler name="/debug/dump" class="solr.DumpRequestHandler" >
+    <lst name="defaults">
+     <str name="echoParams">explicit</str>
+     <str name="echoHandler">true</str>
+    </lst>
+  </requestHandler>
+
+</config>
