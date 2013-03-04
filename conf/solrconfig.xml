@@ -8,8 +8,8 @@
   <luceneMatchVersion>LUCENE_41</luceneMatchVersion>
   <abortOnConfigurationError>${solr.abortOnConfigurationError:true}</abortOnConfigurationError>
   <!-- <lib dir="../../lib" /> -->
-  <lib dir="/usr/local/solr/contrib/analysis-extras/lib" />
-  <lib dir="/usr/local/solr/contrib/analysis-extras/lucene-libs" />
+  <lib dir="../contrib/analysis-extras/lib" />
+  <lib dir="../contrib/analysis-extras/lucene-libs" />
   <dataDir>${solr.scv_dev.data.dir:}</dataDir>
   <directoryFactory name="DirectoryFactory" class="${solr.directoryFactory:solr.NRTCachingDirectoryFactory}"/>
   <!-- index time configurations -->
