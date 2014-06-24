@@ -1,0 +1,22 @@
+<str name="pf">
+  title_unstem_search^1000000
+  lib_name_unstem_search^1000000
+  subtitle_unstem_search^500000
+  clio_ssim^500000
+  title_tim^250000
+  lib_date_sim^250000
+  subtitle_tim^100000
+  title_addl_unstem_search^50000
+  title_addl_tim^25000
+  title_added_entry_unstem_search^15000
+  title_added_entry_tim^12500
+  extent_tim^5000
+  lib_subject_unstem_search^10000
+  lib_subject_sim^7500
+  lib_subject_tim^5000
+  lib_name_tim^5000
+  lib_repo_tim^5000
+  lib_project_tim^5000
+  lib_collection_tim^5000
+  text
+</str>

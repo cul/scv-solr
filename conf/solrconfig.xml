@@ -66,6 +66,7 @@
           <str name="facet.limit">10</str>
           <str name="facet.field">format_ssi</str>
           <str name="facet.field">lib_collection_sim</str>
+          <str name="facet.field">lib_shelf_sim</str>
           <str name="facet.field">lib_format_sim</str>
           <str name="facet.field">lib_name_sim</str>
           <str name="facet.field">lib_project_sim</str>
@@ -85,6 +86,7 @@
           <str name="facet.limit">10</str>
           <str name="facet.field">format_ssi</str>
           <str name="facet.field">lib_collection_sim</str>
+          <str name="facet.field">lib_shelf_sim</str>
           <str name="facet.field">lib_format_sim</str>
           <str name="facet.field">lib_name_sim</str>
           <str name="facet.field">lib_project_sim</str>
@@ -110,6 +112,7 @@
           <str name="facet.limit">10</str>
           <str name="facet.field">format_ssi</str>
           <str name="facet.field">lib_collection_sim</str>
+          <str name="facet.field">lib_shelf_sim</str>
           <str name="facet.field">lib_format_sim</str>
           <str name="facet.field">lib_name_sim</str>
           <str name="facet.field">lib_project_sim</str>
@@ -129,6 +132,7 @@
           <str name="facet.limit">10</str>
           <str name="facet.field">format_ssi</str>
           <str name="facet.field">lib_collection_sim</str>
+          <str name="facet.field">lib_shelf_sim</str>
           <str name="facet.field">lib_format_sim</str>
           <str name="facet.field">lib_name_sim</str>
           <str name="facet.field">lib_project_sim</str>
@@ -164,54 +168,10 @@
       <str name="echoParams">explicit</str>      
       <str name="q.alt">*:*</str>
       <str name="mm">2&lt;-1 5&lt;-2 6&lt;90%</str>
-      <str name="qf">
-        title_unstem_search^100000
-        lib_name_unstem_search^100000
-        subtitle_unstem_search^50000
-        clio_ssim^50000
-        title_tim^25000
-        lib_date_sim^25000
-        subtitle_tim^10000
-        title_addl_unstem_search^5000
-        title_addl_tim^2500
-        title_added_entry_unstem_search^1500
-        title_added_entry_tim^1250
-        extent_tim^500
-        lib_subject_unstem_search^1000
-        lib_subject_sim^750
-        lib_subject_tim^500
-        lib_name_tim^500
-        lib_repo_tim^500
-        lib_project_tim^500
-        lib_collection_tim^500
-        text
-      </str>
-      <str name="pf">
-        title_unstem_search^1000000
-        lib_name_unstem_search^1000000
-        subtitle_unstem_search^500000
-        clio_ssim^500000
-        title_tim^250000
-        lib_date_sim^250000
-        subtitle_tim^100000
-        title_addl_unstem_search^50000
-        title_addl_tim^25000
-        title_added_entry_unstem_search^15000
-        title_added_entry_tim^12500
-        extent_tim^5000
-        lib_subject_unstem_search^10000
-        lib_subject_sim^6250
-        lib_subject_tim^5000
-        lib_name_tim^5000
-        lib_repo_tim^5000
-        lib_project_tim^5000
-        lib_collection_tim^5000
-        subject_addl_unstem_search^2500
-        subject_addl_tim^500
-        title_series_unstem_search^250
-        title_series_tim^100
-        text^10
-      </str>
+      <xi:include href="search_qf.xml" xmlns:xi="http://www.w3.org/2001/XInclude">
+      </xi:include>
+      <xi:include href="search_pf.xml" xmlns:xi="http://www.w3.org/2001/XInclude">
+      </xi:include>
       <int name="ps">3</int>
       <float name="tie">0.01</float>
 
@@ -223,6 +183,7 @@
       <str name="facet.limit">10</str>
       <str name="facet.field">format_ssi</str>
       <str name="facet.field">lib_collection_sim</str>
+      <str name="facet.field">lib_shelf_sim</str>
       <str name="facet.field">lib_format_sim</str>
       <str name="facet.field">lib_name_sim</str>
       <str name="facet.field">lib_project_sim</str>
@@ -269,6 +230,7 @@
       <str name="facet.limit">10</str>
       <str name="facet.field">format_ssi</str>
       <str name="facet.field">lib_collection_sim</str>
+      <str name="facet.field">lib_shelf_sim</str>
       <str name="facet.field">lib_format_sim</str>
       <str name="facet.field">lib_name_sim</str>
       <str name="facet.field">lib_project_sim</str>
@@ -319,6 +281,7 @@
       <str name="facet.limit">10</str>
       <str name="facet.field">format_ssi</str>
       <str name="facet.field">lib_collection_sim</str>
+      <str name="facet.field">lib_shelf_sim</str>
       <str name="facet.field">lib_format_sim</str>
       <str name="facet.field">lib_name_sim</str>
       <str name="facet.field">lib_project_sim</str>
@@ -365,6 +328,7 @@
       <str name="facet.limit">10</str>
       <str name="facet.field">format_ssi</str>
       <str name="facet.field">lib_collection_sim</str>
+      <str name="facet.field">lib_shelf_sim</str>
       <str name="facet.field">lib_format_sim</str>
       <str name="facet.field">lib_name_sim</str>
       <str name="facet.field">lib_project_sim</str>
@@ -408,6 +372,7 @@
       <str name="facet.limit">10</str>
       <str name="facet.field">format_ssi</str>
       <str name="facet.field">lib_collection_sim</str>
+      <str name="facet.field">lib_shelf_sim</str>
       <str name="facet.field">lib_format_sim</str>
       <str name="facet.field">lib_name_sim</str>
       <str name="facet.field">lib_project_sim</str>

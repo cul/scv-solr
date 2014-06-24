@@ -1,0 +1,24 @@
+<str name="qf">
+  id^100000
+  title_unstem_search^100000
+  lib_name_unstem_search^100000
+  subtitle_unstem_search^50000
+  cul_member_of_ssim^50000
+  clio_ssim^50000
+  title_tim^25000
+  lib_date_sim^25000
+  subtitle_tim^10000
+  title_addl_unstem_search^5000
+  title_addl_tim^2500
+  title_added_entry_unstem_search^1500
+  title_added_entry_tim^1250
+  extent_tim^500
+  lib_subject_unstem_search^1000
+  lib_subject_sim^750
+  lib_subject_tim^500
+  lib_name_tim^500
+  lib_repo_tim^500
+  lib_project_tim^500
+  lib_collection_tim^500
+  text
+</str>
